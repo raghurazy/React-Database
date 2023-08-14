@@ -46,8 +46,10 @@ function App() {
     fetctMovieHandler();
   },[fetctMovieHandler]);
 
-  const addMovieHandler = async (movie) =>{
-    const res = await fetch("https://react-http-project-dcdba-default-rtdb.firebaseio.com/movies.json",{
+  const addMovieHandler = useCallback(async (movie) =>{
+
+    try{
+      const res = await fetch("https://react-http-project-dcdba-default-rtdb.firebaseio.com/movies.json",{
       method : 'POST',
       body : JSON.stringify(movie),
       headers : {
@@ -57,13 +59,17 @@ function App() {
 
     const Data = await res.json();
     console.log(Data);
-  }
+    } catch (error){
+      setError('somthing went wrong')
+    }
+    setIsLoading(false);
+  }, [])
 
 
   let content = <p>Found no Movies</p>
 
   if(movies.length > 0){
-    content = <MovieList movies={movies} />
+    content = <MovieList setMovies={fetctMovieHandler} movies={movies} />
   }
     if (error) {
     const timeout = setTimeout(fetctMovieHandler, 5000);

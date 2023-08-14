@@ -32,7 +32,7 @@ function AddMovie(props) {
         <textarea rows='5' id='opening-text' ref={openingTextRef}></textarea>
       </div>
       <div className={classes.control}>
-        <label htmlFor='date'>Release Date</label>
+        <label htmlFor='Date'>Release Date</label>
         <input type='text' id='date' ref={releaseDateRef} />
       </div>
       <button>Add Movie</button>
